@@ -256,22 +256,21 @@ public class Main {
      * @param onlyReturn - возвращать только максимальный элемент без вывода.
      */
     public static int getMaxElem(int[][] arr, int onlyReturn) {
-        int[] indexes = new int[2];
-        int max_element = findMax(arr[0]);
-        for (int i = 1; i < arr.length; i++) {
-            int tmp = findMax(arr[i]);
-            if (max_element < tmp) {
-                max_element = tmp;
-                indexes[0] = i;
+        int x = 0;
+        int y = 0;
+
+        int max_element = arr[0][0];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (max_element < arr[i][j]) {
+                    max_element = arr[i][j];
+                    x = i;
+                    y = j;
+                }
             }
         }
         if (onlyReturn == 0) {
-            for (int j = 0; j < arr[indexes[0]].length; j++) {
-                if (arr[indexes[0]][j] == max_element) {
-                    indexes[1] = j;
-                }
-            }
-            System.out.println("Максимальный элемент: " + max_element + " координаты: " + indexes[0] + " , " + indexes[1]);
+            System.out.println("Максимальный элемент: " + max_element + " координаты: " + x + " , " + y);
         }
         return max_element;
     }
@@ -316,8 +315,20 @@ public class Main {
         for (int i = 0; i < arr.length; i++) {
             System.out.println("Строка " + i + " Сумма строки: " + sumArray(arr[i]));
         }
-        System.out.println("Максимальный элемент: " + getMaxElem(arr, 1));
-        System.out.println("Минимальный элемент: " + getMinElem(arr));
+        int max_elem = arr[0][0];
+        int min_elem = arr[0][0];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (max_elem < arr[i][j]) {
+                    max_elem = arr[i][j];
+                }
+                if (min_elem > arr[i][j]) {
+                    min_elem = arr[i][j];
+                }
+            }
+        }
+        System.out.println("Максимальный элемент: " + max_elem);
+        System.out.println("Минимальный элемент: " + min_elem);
     }
 
     /**
